@@ -26,7 +26,7 @@ namespace SkypeSystemAudio
             skype = new Skype();
             de = new MMDeviceEnumerator();
             MMDevice defaultDevice=de.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
-            if (isLoggedIn() && skype.Settings.AudioOut != defaultDevice.FriendlyName && skype.Settings.Ringer != defaultDevice.FriendlyName)
+            if (isLoggedIn() /*&& skype.Settings.AudioOut != defaultDevice.FriendlyName && skype.Settings.Ringer != defaultDevice.FriendlyName*/)
             {
                 skype.Settings.AudioOut = defaultDevice.FriendlyName;
                 skype.Settings.Ringer = defaultDevice.FriendlyName; 
@@ -38,7 +38,7 @@ namespace SkypeSystemAudio
         {
             
             Debug.WriteLine(String.Format("Default device changed = {0}, {1}, {2}", defaultDeviceId, role, flow));
-            if (isLoggedIn() && skype.Settings.AudioOut != de.GetDevice(defaultDeviceId).FriendlyName && skype.Settings.Ringer != de.GetDevice(defaultDeviceId).FriendlyName)
+            if (isLoggedIn() /*&& skype.Settings.AudioOut != de.GetDevice(defaultDeviceId).FriendlyName && skype.Settings.Ringer != de.GetDevice(defaultDeviceId).FriendlyName*/)
             {
                 skype.Settings.AudioOut = de.GetDevice(defaultDeviceId).FriendlyName;
                 skype.Settings.Ringer = de.GetDevice(defaultDeviceId).FriendlyName;
