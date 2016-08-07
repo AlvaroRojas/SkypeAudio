@@ -93,6 +93,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\social132 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\social132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\social132 %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <COMReference Include="SKYPE4COMLib">
       <Guid>{03282B5D-B38F-469D-849A-09B0A7F4881B}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -102,15 +111,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\social132 %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\social132.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\social132 %281%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

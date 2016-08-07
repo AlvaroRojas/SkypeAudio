@@ -25,23 +25,42 @@ namespace SkypeSystemAudio
         {
             skype = new Skype();
             de = new MMDeviceEnumerator();
-            MMDevice defaultDevice=de.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
-            if (isLoggedIn() /*&& skype.Settings.AudioOut != defaultDevice.FriendlyName && skype.Settings.Ringer != defaultDevice.FriendlyName*/)
-            {
-                skype.Settings.AudioOut = defaultDevice.FriendlyName;
-                skype.Settings.Ringer = defaultDevice.FriendlyName; 
-            }
+            SetDefaultAudioDevices();
             de.RegisterEndpointNotificationCallback(this);
+        }
+
+        private void SetDefaultAudioDevices()
+        {
+            MMDevice defaulOuttDevice = de.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
+            MMDevice defaulIntDevice = de.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Console);
+            if (isLoggedIn())
+            {
+                skype.Settings.AudioOut = defaulOuttDevice.FriendlyName;
+                skype.Settings.Ringer = defaulOuttDevice.FriendlyName;
+                skype.Settings.AudioIn = defaulIntDevice.FriendlyName;
+            }
         }
 
         public void OnDefaultDeviceChanged(DataFlow flow, Role role, string defaultDeviceId)
         {
-            
+
             Debug.WriteLine(String.Format("Default device changed = {0}, {1}, {2}", defaultDeviceId, role, flow));
-            if (isLoggedIn() /*&& skype.Settings.AudioOut != de.GetDevice(defaultDeviceId).FriendlyName && skype.Settings.Ringer != de.GetDevice(defaultDeviceId).FriendlyName*/)
+            SetDefaultAudioDevices(flow, defaultDeviceId);
+        }
+
+        private void SetDefaultAudioDevices(DataFlow flow, string defaultDeviceId)
+        {
+            if (isLoggedIn())
             {
-                skype.Settings.AudioOut = de.GetDevice(defaultDeviceId).FriendlyName;
-                skype.Settings.Ringer = de.GetDevice(defaultDeviceId).FriendlyName;
+                if (flow == DataFlow.Render)
+                {
+                    skype.Settings.AudioOut = de.GetDevice(defaultDeviceId).FriendlyName;
+                    skype.Settings.Ringer = de.GetDevice(defaultDeviceId).FriendlyName;
+                }
+                else
+                {
+                    skype.Settings.AudioIn = de.GetDevice(defaultDeviceId).FriendlyName;
+                }
             }
         }
 

@@ -28,7 +28,7 @@ namespace SkypeSystemAudio
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            sc = new SkypeAudioController();
+
         }
 
         private void Exit_Click(object sender, EventArgs e)
